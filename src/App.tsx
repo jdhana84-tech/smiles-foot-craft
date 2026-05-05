@@ -442,20 +442,24 @@ const Gallery = () => {
         <h3 className="font-bold text-white tracking-tighter">Details in Craft</h3>
       </div>
       <div className="flex gap-6 md:gap-8 overflow-x-auto px-6 md:px-8 no-scrollbar pb-10">
-        {images.map((img, i) => (
-          <motion.div
-            key={i}
-            whileHover={{ scale: 1.05 }}
-            className="flex-shrink-0 w-64 md:w-80 h-80 md:h-96 rounded-3xl overflow-hidden border border-white/10"
-          >
-            <img 
-              src={img} 
-              alt="Gallery Item" 
-              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
-              referrerPolicy="no-referrer"
-            />
-          </motion.div>
-        ))}
+        {images
+  .filter((img) => typeof img === "string" && img.trim() !== "")
+  .map((img, i) => (
+    <motion.div
+      key={i}
+      whileHover={{ scale: 1.05 }}
+      className="flex-shrink-0 w-64 md:w-80 h-80 md:h-96"
+    >
+      <img
+        src={img}
+        alt=""
+        className="w-full h-full object-cover grayscale hover:grayscale-0 transition"
+        onError={(e) => {
+          e.currentTarget.parentElement.style.display = "none";
+        }}
+      />
+    </motion.div>
+))}
       </div>
     </section>
   );
@@ -521,7 +525,7 @@ const Contact = () => {
 
           <div className="aspect-square rounded-3xl overflow-hidden border border-white/5 grayscale hover:grayscale-0 transition-all duration-1000">
             <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.123456789!2d80.27!3d13.09!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a52660000000001%3A0x0!2zU21pbGVzIEZvb3QgQ3JhZnQ!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin" 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.0467760582064!2d80.27736927484368!3d13.096222087230691!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a526f59aec0df21%3A0xae3c1e078d3232e4!2sSmiles%20Foot%20Craft!5e0!3m2!1sen!2sin!4v1777990519307!5m2!1sen!2sin"
               width="100%" 
               height="100%" 
               style={{ border: 0 }} 
